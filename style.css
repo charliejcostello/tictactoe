@@ -1,0 +1,110 @@
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --muted: #bbb;
+  --gap: 6px;           /* thickness of white lines */
+  --cell-size: min(26vmin, 120px);
+  --radius: 12px;
+  --cell-radius: 6px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.app {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  margin: 0.2rem 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status {
+  font-size: 1rem;
+  color: var(--muted);
+  min-height: 1.4em;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, var(--cell-size));
+  grid-template-rows: repeat(3, var(--cell-size));
+  gap: var(--gap);               /* this makes the white board lines */
+  background: var(--fg);         /* white lines/background behind cells */
+  padding: var(--gap);
+  border-radius: var(--radius);
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--cell-size) * 0.55);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--fg);
+  background: var(--bg);         /* black squares */
+  border: none;
+  border-radius: var(--cell-radius);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 80ms ease, background 120ms ease;
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.cell:hover:not(.disabled) {
+  background: #0a0a0a;
+  transform: translateY(-1px);
+}
+
+.cell.disabled {
+  cursor: default;
+}
+
+.cell.win {
+  background: #111;
+  color: #00ffcc; /* subtle highlight for winning marks */
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.reset {
+  background: transparent;
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reset:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.note {
+  margin: 0.2rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
